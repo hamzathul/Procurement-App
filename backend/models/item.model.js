@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
+import mongooseSequence from "mongoose-sequence";
 
 const itemSchema = new mongoose.Schema({
-  itemNo: { type: Number, autoIncrement: true },
+  // itemNo: { type: Number, autoIncrement: true },
   itemName: { type: String, required: true },
   inventoryLocation: { type: String },
   brand: { type: String },
@@ -16,6 +17,9 @@ const itemSchema = new mongoose.Schema({
   itemImages: [{ type: String }],
   status: { type: String, enum: ["Enabled", "Disabled"], default: "Enabled" },
 });
+
+itemSchema.plugin(mongooseSequence(mongoose), { inc_field: "itemNo" });
+
 
 const Item = mongoose.model("Item", itemSchema);
 
