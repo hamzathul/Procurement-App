@@ -2,9 +2,34 @@ import Item from "../models/item.model.js";
 
 export const createItem = async (req, res) => {
   try {
-    const item = new Item(req.body);
-    await item.save();
-    res.status(201).json(item);
+     const {
+       itemName,
+       inventoryLocation,
+       brand,
+       category,
+       supplier,
+       stockUnit,
+       unitPrice,
+       status,
+     } = req.body;
+
+     // Get uploaded image paths from Multer
+     const itemImages = req.files.map((file) => file.path);
+
+     const newItem = new Item({
+       itemName,
+       inventoryLocation,
+       brand,
+       category,
+       supplier,
+       stockUnit,
+       unitPrice,
+       itemImages,
+       status,
+     });
+
+     const savedItem = await newItem.save();
+     res.status(201).json(savedItem);
   } catch (error) {
     console.log("Error in createItem controller:", error.message);
     res.status(400).json({ error: error.message });
