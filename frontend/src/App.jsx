@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Supplier from "./pages/Supplier";
 import Item from "./pages/Item";
+import Purchase from "./pages/Purchase";
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/suppliers" element={<Supplier />} />
         <Route path="/items" element={<Item />} />
-        {/* <Route path="/purchase" element={<PurchasePage />} /> */}
+        <Route path="/purchase" element={<Purchase />} />
       </Routes>
     </div>
   );
