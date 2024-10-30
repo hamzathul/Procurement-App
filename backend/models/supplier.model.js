@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
+import mongooseSequence from 'mongoose-sequence'
 
 const supplierSchema = new mongoose.Schema({
-  supplierNo: { type: Number, autoIncrement: true },
+  // supplierNo: { type: Number, autoIncrement: true },
   supplierName: { type: String, required: true },
   address: { type: String },
   taxNo: { type: String },
@@ -14,6 +15,8 @@ const supplierSchema = new mongoose.Schema({
     default: "Active",
   },
 });
+
+supplierSchema.plugin(mongooseSequence(mongoose), { inc_field: "supplierNo" });
 
 const Supplier = mongoose.model("Supplier", supplierSchema);
 
